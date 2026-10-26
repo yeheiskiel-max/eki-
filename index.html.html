@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portofolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--ink:#18202e;--muted:#6b7587;--line:#cfd5df;--accent:#2d56e0;--accent-ink:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10141c;--surface:#171c27;--ink:#e8ecf4;--muted:#8d97ab;--line:#2f3748;--accent:#7c9bff;--accent-ink:#10141c}}
+:root[data-theme="dark"]{--bg:#10141c;--surface:#171c27;--ink:#e8ecf4;--muted:#8d97ab;--line:#2f3748;--accent:#7c9bff;--accent-ink:#10141c}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;display:flex;flex-direction:column}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+header{flex:none;border-bottom:1px solid var(--line)}
+nav{max-width:1040px;margin:0 auto;padding:12px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between}
+.logo{font-weight:800;text-decoration:none;white-space:nowrap}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;font-size:.9rem;overflow-x:auto}
+nav ul a{display:block;padding:6px 10px;border-radius:6px;text-decoration:none;color:var(--muted);white-space:nowrap}
+nav ul a:hover{color:var(--ink)}
+nav ul a[aria-current="true"]{background:var(--accent);color:var(--accent-ink)}
+.stage{flex:1;min-height:0;position:relative}
+.slide{position:absolute;inset:0;overflow-y:auto;display:none}
+.slide.on{display:block;animation:in .25s ease}
+@keyframes in{from{opacity:0}to{opacity:1}}
+.inner{max-width:1040px;min-height:100%;margin:0 auto;padding:36px 20px;display:flex;flex-direction:column;justify-content:center}
+h1{font-size:clamp(2.4rem,7vw,4.8rem);line-height:1;margin:0 0 16px;font-weight:800;letter-spacing:-.03em}
+h2{font-size:1.8rem;margin:0 0 24px;font-weight:800;letter-spacing:-.02em}
+h3{font-size:1.1rem;margin:0 0 6px;font-weight:600}
+.ph{border:1.5px dashed var(--line);border-radius:6px;color:var(--muted);padding:14px 16px;font-size:.92rem}
+.line{height:14px;border-radius:3px;background:var(--line);opacity:.55;margin:10px 0}
+.line.s{width:60%}.line.m{width:80%}
+.hero{display:grid;grid-template-columns:1fr 260px;gap:40px;align-items:center}
+.photo{aspect-ratio:4/5;display:grid;place-items:center;text-align:center}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-block;padding:12px 22px;border-radius:6px;border:1.5px solid var(--ink);text-decoration:none;font-weight:600;font-size:.95rem;background:transparent;color:inherit;font-family:inherit;cursor:pointer}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px;margin:0}
+.card .thumb{aspect-ratio:16/10;margin-bottom:14px;display:grid;place-items:center}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tag{width:72px;height:26px;border:1.5px dashed var(--line);border-radius:20px}
+.tag{width:auto;height:auto;padding:2px 12px;border-style:solid;font-size:.85rem;color:var(--muted)}
+.tl{border-left:2px solid var(--line);padding-left:22px;display:grid;gap:22px}
+.tl .item{position:relative}
+.tl .item::before{content:"";position:absolute;left:-29px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.meta{color:var(--muted);font-size:.88rem;margin:0}
+form{display:grid;gap:12px;max-width:520px}
+label{font-weight:600;font-size:.92rem;display:grid;gap:6px}
+input,textarea{font:inherit;color:inherit;background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px;width:100%}
+textarea{min-height:90px;resize:vertical}
+.bar{flex:none;border-top:1px solid var(--line)}
+.bar div{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dots{display:flex;gap:8px}
+.dots button{width:10px;height:10px;padding:0;border-radius:50%;border:1.5px solid var(--muted);background:transparent;cursor:pointer}
+.dots button[aria-current="true"]{background:var(--accent);border-color:var(--accent)}
+.btn.sm{padding:8px 16px;font-size:.9rem}
+.btn:disabled{opacity:.35;cursor:default}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.photo{max-width:200px;aspect-ratio:1}.logo{display:none}}
+@media (prefers-reduced-motion:reduce){.slide.on{animation:none}}
+</style>
+</head>
+<body>
+<header><nav aria-label="Navigasi utama">
+<a class="logo" href="#beranda">Yeheiekiel Hutagaol</a>
+<ul id="menu"></ul>
+</nav></header>
+
+<main class="stage" id="stage">
+<section class="slide" id="beranda" data-title="Beranda"><div class="inner">
+<div class="hero">
+<div>
+<h1>Yeheiekiel Hutagaol</h1>
+<p class="meta" style="font-size:1.1rem">TKJ 1 · Teknik Komputer dan Jaringan</p>
+<p>Saya tertarik pada jaringan komputer, administrasi server, dan teknologi yang membuat perangkat saling terhubung. <!-- GANTI dengan kalimat perkenalan versimu --></p>
+<div class="btns"><a class="btn pri" href="#proyek">Lihat proyek</a><a class="btn" href="#kontak">Hubungi saya</a></div>
+</div>
+<div class="ph photo">Foto profil</div>
+</div>
+</div></section>
+
+<section class="slide" id="tentang" data-title="Tentang"><div class="inner">
+<h2>Tentang saya</h2>
+<p style="max-width:70ch">Halo, saya Yeheiekiel Hutagaol dari jurusan Teknik Komputer dan Jaringan (TKJ). Saya belajar merakit dan memperbaiki komputer, mengatur jaringan LAN dan WLAN, serta mengelola server dasar.</p>
+<p style="max-width:70ch">Saya suka memecahkan masalah teknis dan ingin terus belajar, terutama tentang jaringan dan keamanan siber. <!-- GANTI dengan cerita, nilai, dan minatmu --></p>
+</div></section>
+
+<section class="slide" id="keahlian" data-title="Keahlian"><div class="inner">
+<h2>Keahlian</h2>
+<div class="grid">
+<div class="card"><h3>Keahlian utama</h3><div class="tags"><span class="tag">Jaringan komputer</span><span class="tag">Konfigurasi router</span><span class="tag">Troubleshooting</span></div></div>
+<div class="card"><h3>Keahlian pendukung</h3><div class="tags"><span class="tag">Perakitan PC</span><span class="tag">Kabel UTP</span><span class="tag">Dasar Linux</span></div></div>
+<div class="card"><h3>Alat dan perangkat</h3><div class="tags"><span class="tag">Cisco Packet Tracer</span><span class="tag">MikroTik</span><span class="tag">Wireshark</span></div></div>
+</div>
+</div></section>
+
+<section class="slide" id="pengalaman" data-title="Pengalaman"><div class="inner">
+<h2>Pengalaman dan pendidikan</h2>
+<div class="tl">
+<div class="item"><h3>Siswa Teknik Komputer dan Jaringan</h3><p class="meta">Nama sekolah · tahun mulai – sekarang</p><p>Mempelajari jaringan dasar, administrasi sistem, dan perakitan komputer.</p></div><div class="item"><h3>Pengalaman praktik / PKL</h3><p class="meta">Nama tempat · periode</p><p>Ceritakan tugas dan hal yang kamu pelajari.</p></div><div class="item"><h3>Kegiatan organisasi atau pelatihan</h3><p class="meta">Nama kegiatan · periode</p><p>Ceritakan peran dan hasilnya.</p></div>
+</div>
+</div></section>
+
+<section class="slide" id="proyek" data-title="Proyek"><div class="inner">
+<h2>Proyek unggulan</h2>
+<div class="grid">
+<article class="card"><div class="ph thumb">Gambar proyek</div><h3>Simulasi jaringan LAN sekolah</h3><p class="meta">Peran: perancang jaringan</p><p>Merancang topologi LAN dengan VLAN dan pengalamatan IP di Packet Tracer.</p><div class="tags"><span class="tag">Packet Tracer</span><span class="tag">VLAN</span></div></article><article class="card"><div class="ph thumb">Gambar proyek</div><h3>Konfigurasi router MikroTik</h3><p class="meta">Peran: konfigurator</p><p>Mengatur DHCP, NAT, dan manajemen bandwidth untuk jaringan kecil.</p><div class="tags"><span class="tag">MikroTik</span><span class="tag">DHCP</span></div></article><article class="card"><div class="ph thumb">Gambar proyek</div><h3>Instalasi server Linux</h3><p class="meta">Peran: administrator</p><p>Memasang dan mengatur layanan web server dasar.</p><div class="tags"><span class="tag">Linux</span><span class="tag">Apache</span></div></article>
+</div>
+</div></section>
+
+<section class="slide" id="prestasi" data-title="Prestasi"><div class="inner">
+<h2>Prestasi dan sertifikasi</h2>
+<div class="grid">
+<div class="card"><h3>Prestasi</h3><p class="meta">Tuliskan lomba, juara, atau penghargaanmu di sini.</p></div>
+<div class="card"><h3>Sertifikasi</h3><p class="meta">Tuliskan sertifikat pelatihan atau kompetensi di sini.</p></div>
+</div>
+</div></section>
+
+<section class="slide" id="testimoni" data-title="Testimoni"><div class="inner">
+<h2>Testimoni</h2>
+<div class="grid">
+<blockquote class="card"><p>Tuliskan kutipan dari guru, pembimbing, atau rekan.</p><p class="meta">Nama dan jabatan pemberi testimoni</p></blockquote>
+<blockquote class="card"><p>Tuliskan kutipan dari guru, pembimbing, atau rekan.</p><p class="meta">Nama dan jabatan pemberi testimoni</p></blockquote>
+</div>
+</div></section>
+
+<section class="slide" id="kontak" data-title="Kontak"><div class="inner">
+<h2>Kontak</h2>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;align-items:start">
+<div>
+<p><strong>Email</strong><br><a href="mailto:yeheiskiel@gmail.com">yeheiskiel@gmail.com</a></p>
+<p><strong>Media sosial</strong><br><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></p>
+<p><strong>Lokasi</strong><br>Indonesia</p>
+</div>
+<form id="cf">
+<label>Nama<input type="text" id="cn" autocomplete="name" required></label>
+<label>Email<input type="email" id="ce" autocomplete="email" required></label>
+<label>Pesan<textarea id="cm" required></textarea></label>
+<input type="text" id="cg" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+<button class="btn pri" type="submit" id="cs">Kirim pesan</button>
+<p class="meta" id="cx" role="status" aria-live="polite"></p>
+</form>
+</div>
+</div></section>
+</main>
+
+<div class="bar"><div>
+<button class="btn sm" id="prev" type="button">Sebelumnya</button>
+<div class="dots" id="dots" style="padding:0"></div>
+<button class="btn sm pri" id="next" type="button">Berikutnya</button>
+</div></div>
+
+<script>
+(function(){
+var slides=[].slice.call(document.querySelectorAll(".slide"));
+var menu=document.getElementById("menu"),dots=document.getElementById("dots");
+var prev=document.getElementById("prev"),next=document.getElementById("next");
+var cur=0,links=[],dotEls=[];
+slides.forEach(function(s,i){
+  var li=document.createElement("li"),a=document.createElement("a");
+  a.href="#"+s.id;a.textContent=s.dataset.title;a.onclick=function(e){e.preventDefault();go(i)};
+  li.appendChild(a);menu.appendChild(li);links.push(a);
+  var d=document.createElement("button");d.type="button";d.setAttribute("aria-label",s.dataset.title);
+  d.onclick=function(){go(i)};dots.appendChild(d);dotEls.push(d);
+});
+function go(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach(function(s,j){s.classList.toggle("on",j===cur)});
+  links.forEach(function(a,j){a.setAttribute("aria-current",j===cur)});
+  dotEls.forEach(function(d,j){d.setAttribute("aria-current",j===cur)});
+  slides[cur].scrollTop=0;
+  prev.disabled=cur===0;next.disabled=cur===slides.length-1;
+  var cl=links[cur];if(cl.scrollIntoView)cl.scrollIntoView({block:"nearest",inline:"center"});
+  try{history.replaceState(null,"","#"+slides[cur].id)}catch(e){}
+}
+function fromHash(){
+  var h=(location.hash||"").slice(1),i=slides.findIndex(function(s){return s.id===h});
+  go(i<0?0:i);
+}
+prev.onclick=function(){go(cur-1)};next.onclick=function(){go(cur+1)};
+document.addEventListener("keydown",function(e){
+  var t=e.target.tagName;if(t==="INPUT"||t==="TEXTAREA")return;
+  if(e.key==="ArrowRight"||e.key==="PageDown")go(cur+1);
+  if(e.key==="ArrowLeft"||e.key==="PageUp")go(cur-1);
+});
+var x0=null;
+document.getElementById("stage").addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
+document.getElementById("stage").addEventListener("touchend",function(e){
+  if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;
+  if(Math.abs(dx)>70)go(cur+(dx<0?1:-1));
+});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  if(a.closest("#menu"))return;
+  a.onclick=function(e){var i=slides.findIndex(function(s){return "#"+s.id===a.getAttribute("href")});if(i>=0){e.preventDefault();go(i)}};
+});
+var cf=document.getElementById("cf");
+cf.onsubmit=function(e){e.preventDefault();
+  var st=document.getElementById("cx"),bt=document.getElementById("cs");
+  if(document.getElementById("cg").value)return;
+  var n=document.getElementById("cn").value,em=document.getElementById("ce").value,m=document.getElementById("cm").value;
+  bt.disabled=true;st.textContent="Mengirim...";
+  fetch("https://formsubmit.co/ajax/yeheiskiel@gmail.com",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","Accept":"application/json"},
+    body:JSON.stringify({name:n,email:em,message:m,_subject:"Pesan portofolio dari "+n,_replyto:em,_captcha:"false"})
+  }).then(function(r){return r.json()}).then(function(d){
+    if(d.success==="true"||d.success===true){st.textContent="Terima kasih, pesan terkirim.";cf.reset()}
+    else{throw new Error(d.message||"gagal")}
+  }).catch(function(){
+    st.innerHTML='Pesan gagal terkirim. Silakan kirim langsung ke <a href="mailto:yeheiskiel@gmail.com">yeheiskiel@gmail.com</a>.';
+  }).then(function(){bt.disabled=false});
+};
+fromHash();
+})();
+</script>
+</body>
+</html>
