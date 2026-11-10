@@ -82,6 +82,65 @@ h2{font-size:1.5rem;margin-bottom:18px}
 .bar div{padding:10px 14px}
 .bar .btn{flex:1}
 }
+/* ===== PENYESUAIAN TAMPILAN HP, TABLET, LAPTOP ===== */
+:root{--w:1040px;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+nav,.inner,.bar div{max-width:var(--w)}
+h1,h2,h3,p{overflow-wrap:break-word}
+img,video,iframe{max-width:100%}
+nav ul{scrollbar-width:none;-webkit-overflow-scrolling:touch;min-width:0}
+nav ul::-webkit-scrollbar{display:none}
+.slide{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.grid{grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
+#kontak .grid{grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))!important}
+/* Tablet */
+@media (min-width:761px) and (max-width:1023px){
+.hero{grid-template-columns:1fr 220px;gap:32px}
+.inner{padding:32px 28px}
+nav,.bar div{padding-left:28px;padding-right:28px}
+}
+/* Laptop dan layar besar */
+@media (min-width:1280px){
+:root{--w:1200px}
+html{font-size:17.5px}
+.inner{padding:48px 32px}
+nav,.bar div{padding-left:32px;padding-right:32px}
+.hero{grid-template-columns:1fr 320px;gap:64px}
+.grid{gap:24px}
+.card{padding:22px}
+}
+@media (min-width:1700px){
+:root{--w:1400px}
+html{font-size:19px}
+.hero{grid-template-columns:1fr 380px}
+}
+/* HP: target sentuh nyaman (min. 44px) */
+@media (max-width:760px){
+nav ul a{padding:11px 12px}
+.tbtn{width:44px;height:44px}
+.btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+.hero .btns .btn{flex:1 1 140px}
+.card{padding:16px}
+input,textarea{font-size:16px}
+form{max-width:none}
+}
+/* HP kecil */
+@media (max-width:380px){
+h1{font-size:2.1rem}
+h2{font-size:1.35rem}
+nav{gap:8px}
+.photo{width:140px}
+.tag{font-size:.8rem;padding:2px 10px}
+}
+/* HP posisi miring (landscape) */
+@media (max-height:500px) and (orientation:landscape){
+nav{padding-top:6px;padding-bottom:6px}
+.inner{padding-top:16px;padding-bottom:16px}
+.bar div{padding-top:6px;padding-bottom:6px}
+.hero{grid-template-columns:1fr 150px;gap:24px;text-align:left}
+.hero .btns{justify-content:flex-start}
+.photo{order:0;width:auto;aspect-ratio:4/5;border-radius:6px;margin:0}
+h1{font-size:clamp(1.8rem,5vw,2.6rem)}
+}
 @media (prefers-reduced-motion:reduce){.slide.on{animation:none}}
 </style>
 <script>
@@ -252,11 +311,13 @@ document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key==="PageDown")go(cur+1);
   if(e.key==="ArrowLeft"||e.key==="PageUp")go(cur-1);
 });
-var x0=null;
-document.getElementById("stage").addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
+var x0=null,y0=null;
+document.getElementById("stage").addEventListener("touchstart",function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
 document.getElementById("stage").addEventListener("touchend",function(e){
-  if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;x0=null;
-  if(Math.abs(dx)>70)go(cur+(dx<0?1:-1));
+  if(x0===null)return;
+  var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;y0=null;
+  /* hanya geser mendatar yang jelas; geser vertikal (scroll) diabaikan */
+  if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.5)go(cur+(dx<0?1:-1));
 });
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
   if(a.closest("#menu"))return;
